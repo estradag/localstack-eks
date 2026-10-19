@@ -1,6 +1,11 @@
 variable "region" {
-    type = string
-    description = "AWS region on which all resources are being created"
+  type        = string
+  description = "AWS region for the EKS cluster"
+}
+
+variable "account_id" {
+  type        = string
+  description = "AWS account ID for the EKS cluster and all the resources"
 }
 
 variable "cluster_name" {

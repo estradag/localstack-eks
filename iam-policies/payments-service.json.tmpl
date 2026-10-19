@@ -1,0 +1,19 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "sqs:ReceiveMessage",
+        "sns:Publish",
+        "ssm:GetParameter",
+        "ssm:DescribeParameter"
+      ],
+      "Resource": [
+        "arn:aws:sqs:${region}:${account_id}:payment-requests-queue",
+        "arn:aws:sns:${region}:${account_id}:payment-notifications-topic",
+        "arn:aws:ssm:${region}:${account_id}:parameter/payment-service/*"
+      ]
+    }
+  ]
+}

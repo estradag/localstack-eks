@@ -39,6 +39,8 @@ provider "aws" {
 module "eks_cluster" {
   source = "./modules/eks-cluster"
 
+  account_id   = var.account_id
+  region       = var.region
   cluster_name = var.cluster_name
   namespaces   = var.namespaces
 }

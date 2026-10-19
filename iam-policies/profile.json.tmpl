@@ -5,9 +5,14 @@
       "Effect": "Allow",
       "Action": [
         "s3:GetObject",
-        "s3:PutObject"
+        "s3:PutObject",
+        "ssm:GetParameter",
+        "ssm:DescribeParameter"
       ],
-      "Resource": "arn:aws:s3:::user-data/*"
+      "Resource": [
+        "arn:aws:s3:::user-data/*",
+        "arn:aws:ssm:${region}:${account_id}:parameter/profile-service/*"
+      ]
     }
   ]
 }

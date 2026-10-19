@@ -28,5 +28,5 @@ TL;DR
 > tfenv use 1.16.6
 > lstk start
 > # In your browser, setup your account as a hobbyist so you don't require to pay for anything
-> # Back in your terminal, select AWS emulator and create a profile in your ~/.aws/config file
+> # Back in your terminal, select AWS emulator and create a profile in your ~/.aws/config file, which should be named 'localstack' by default
 > lstk login

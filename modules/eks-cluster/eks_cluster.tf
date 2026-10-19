@@ -1,5 +1,6 @@
 resource "aws_eks_cluster" "my_local_cluster" {
-  name = var.cluster_name
+  name   = var.cluster_name
+  region = var.region
 
   access_config {
     authentication_mode = "API"
@@ -29,6 +30,7 @@ resource "aws_eks_cluster" "my_local_cluster" {
 
 resource "aws_eks_node_group" "node_group_1" {
   cluster_name    = aws_eks_cluster.my_local_cluster.name
+  region          = var.region
   node_group_name = "node-group-1"
   node_role_arn   = aws_iam_role.cluster_role.arn
   subnet_ids      = [aws_subnet.az1.id, aws_subnet.az2.id, aws_subnet.az3.id]
@@ -54,6 +56,7 @@ resource "aws_eks_node_group" "node_group_1" {
 
 resource "aws_eks_node_group" "node_group_2" {
   cluster_name    = aws_eks_cluster.my_local_cluster.name
+  region          = var.region
   node_group_name = "node-group-2"
   node_role_arn   = aws_iam_role.cluster_role.arn
   subnet_ids      = [aws_subnet.az1.id, aws_subnet.az2.id, aws_subnet.az3.id]

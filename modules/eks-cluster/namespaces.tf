@@ -10,7 +10,7 @@ provider "kubernetes" {
 
 resource "kubernetes_namespace_v1" "namespaces" {
   for_each = toset(var.namespaces)
-  
+
   metadata {
     annotations = {
       env = "staging"
@@ -40,6 +40,9 @@ resource "aws_iam_role" "namespace_role" {
   })
 }
 
+# Cluster IAM role should not have permissions required for specific applications or services
+# The Cluster IAM role is what allows the control plane to manage cluster infrastructure
+# Service/application specific permissions should be handled by EKS pod identity instead
 resource "aws_iam_policy" "namespace_policy" {
   for_each = toset(var.namespaces)
 
@@ -50,7 +53,7 @@ resource "aws_iam_policy" "namespace_policy" {
   # Load the external JSON file directly
   policy = templatefile("iam-policies/${each.key}.json.tmpl",
     {
-      region = var.region,
+      region     = var.region,
       account_id = var.account_id
     }
   )
@@ -67,6 +70,7 @@ resource "aws_eks_pod_identity_association" "namespace_pod_identity_association"
   for_each = toset(var.namespaces)
 
   cluster_name    = aws_eks_cluster.my_local_cluster.name
+  region          = var.region
   namespace       = each.key
   service_account = "${each.key}-service-account"
   role_arn        = aws_iam_role.namespace_role[each.key].arn

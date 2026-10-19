@@ -87,3 +87,17 @@ Interaction with RDS and SSM is handled the same as with the payments service.
   ❌  `"Resource": "arn:aws:ssm:us-east-1:123412341234:parameter/profile-service/*"`   
   ✅  `"Resource": "arn:aws:ssm:${region}:${account_id}:parameter/profile-service/*"`   
 - Destroying actions are granted only to dedicated services.
+
+
+## Working with multi-region deployments
+This exercise is not tested up until `terraform apply`, it's just tested until the plan stage so we can validate the resources that need to be created and how they connect with each other.
+
+This approach was selected because a single terraform state shouldn't manage resources spanding more than one region.   
+
+You need to execute the [multi-region-infra-plan](multi-region-infra-plan.sh) file by passing the regions you want terraform to run a plan on, for which you should have a variables file corresponding to the region name. e.g.
+```shell
+./multi-region-infra-plan.sh --region us-east-1,us-west-2
+```
+![us-east-1 resources](assets/two-region-terraform-plan-1.png)
+
+![us-west-2 resources](assets/two-region-terraform-plan-2.png)

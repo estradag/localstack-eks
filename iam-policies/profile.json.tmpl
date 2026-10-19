@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "ssm:GetParameter",
+        "ssm:DescribeParameter"
+      ],
+      "Resource": [
+        "arn:aws:s3:::user-data/*",
+        "arn:aws:ssm:${region}:${account_id}:parameter/profile-service/*"
+      ]
+    }
+  ]
+}

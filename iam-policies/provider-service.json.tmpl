@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "sns:Publish",
+        "ssm:GetParameter",
+        "ssm:DescribeParameter"
+      ],
+      "Resource": [
+        "arn:aws:sns:${region}:${account_id}:provider-notifications-topic",
+        "arn:aws:ssm:${region}:${account_id}:parameter/provider-service/*"
+      ]
+    }
+  ]
+}

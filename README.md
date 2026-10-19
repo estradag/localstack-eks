@@ -101,3 +101,10 @@ You need to execute the [multi-region-infra-plan](multi-region-infra-plan.sh) fi
 ![us-east-1 resources](assets/two-region-terraform-plan-1.png)
 
 ![us-west-2 resources](assets/two-region-terraform-plan-2.png)
+
+
+## Notes for future self
+- Keep researching about other resources that are usually included in a standard configuration for a kubernetes cluster
+- Look into nodepool management tools like Karpenter
+- Look into locally creating this infrastructure with tools like minikube
+- Implement IAM policies validation to check for rules defined [previously](#how-these-permissions-would-be-subjected-to-peer-review)
